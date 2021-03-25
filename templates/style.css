@@ -65,3 +65,18 @@ img {
     margin-bottom: 20px;
     color:darkslategray;
 }
+
+.card-title, .card-text {
+    color: white;
+}
+
+.card-body {
+    background: black;
+    text-align: center;
+    align-content: center;
+}
+
+.card {
+    margin: 10px;
+    border: none;
+}

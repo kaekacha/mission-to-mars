@@ -9,7 +9,7 @@ app = Flask(__name__)
 mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")#this name at the end doesn't matter
 
 # Route to render index.html template using data from Mongo
-@app.route("/")
+@app.route("/", methods=("POST", "GET"))
 def home():
 
     # Find one record of data from the mongo database; if it does not exist, this creates a new collection
@@ -18,7 +18,7 @@ def home():
     #run function to create table
     df = scrape_mars.scrape_table()
 
-    # Return template and data
+    # Return template and data; utilized this documentation for the table: https://stackoverflow.com/questions/52644035/how-to-show-a-pandas-dataframe-into-a-existing-flask-html-table
     return render_template("index.html", mars=mars,tables = [df.to_html(classes='data', header=True)])
 
 # Route that will trigger the scrape function

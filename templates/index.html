@@ -1,3 +1,5 @@
+<!--Utilized same html and css codes as in another of my repositories, https://github.com/kaekacha/web-design-challenge-->
+
 <!DOCTYPE html>
 <html lang="en-us">
 
@@ -6,75 +8,62 @@
     <title>Mars Web Sraping</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/yeti/bootstrap.min.css" integrity="sha384-mLBxp+1RMvmQmXOjBzRjqqr0dP9VHU2tb3FK6VB0fJN/AOu7/y+CAeYeWJZ4b3ii" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
-   
-
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="index.html">Mars Web Scraping</a>
-  
+  <a class="navbar-brand" href="/">Mars Web Scraping</a>
   <button type="button" class="btn btn-dark" href="/scrape">Scrape New Data</button>
 </nav>
 
-    <!-- grid row -->
     <div class="row">
+        <div class="col-md-12">
             <h1>Latest News</h1>
-            <h4>{{ mars.news_title }}</h4>
+            <h3>{{ mars.news_title }}</h3>
             <h4>{{ mars.news_p }} </h4>
+        </div>
     </div>
-    <!-- grid row  -->
-
-    <!-- grid row -->
+    <br>
+    <br>
+   
     <div class="row">
         <div class="col-md-8">
-            <h2>Featured Mars Image</h2>
-            <br>
+            <h1>Featured Mars Image</h1>
             <img src="{{ mars.featured_image_url }}" alt="featured_image"> 
         </div>
         <div class="col-md-4">
             <br>
             <br>
-            <h4>Mars Facts</h4>
+            <h1>Mars Facts</h1>
             <br>
-            {% for table in table %}
-                {{ table|safe }}
+            {% for table in tables %} <!--Used this documentation for this code: https://stackoverflow.com/questions/52644035/how-to-show-a-pandas-dataframe-into-a-existing-flask-html-table-->
+            {{ table|safe }}
             {% endfor %}
         </div>
     </div>
-    <!-- grid row -->
-
 
 <br>
 <br>
 <hr>
 
-<!-- content -->
+<!--Found code for cards online and updated CSS file with formatting for them-->
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>Mars Hemispheres</h1>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="card-deck">
-            {% for x in mars.hemisphere_image_urls %}
-            <div class="card">
-                <img class="card-img-top" src="{{ mars.img_url }}" alt="{{ mars.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ mars.title }}</h5>
-                </div>
+<div class="row">
+    <h1>Mars Hemispheres</h1>
+    <div class="card-deck">
+        {% for x in mars.hemisphere_image_urls %}
+        <div class="card">
+            <img class="card-img-top" src="{{ x.img_url }}" alt="{{ x.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ x.title }}</h5>
             </div>
-            {% endfor %}
         </div>
-    </div> 
-    
-</div>
+        {% endfor %}
+    </div>
+</div> 
 
 
 </body>
-
 <footer class="page-footer font-small bg-dark">
     <div class ="footer-copyright text-center py-3" style="color:lightgrey">
         © Copyright 2021 Akadia Kacha-Ochana
