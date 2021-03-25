@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mars Web Sraping</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/yeti/bootstrap.min.css" integrity="sha384-mLBxp+1RMvmQmXOjBzRjqqr0dP9VHU2tb3FK6VB0fJN/AOu7/y+CAeYeWJZ4b3ii" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+   
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html">Mars Web Scraping</a>
+  
+  <button type="button" class="btn btn-dark" href="/scrape">Scrape New Data</button>
+</nav>
+
+    <!-- grid row -->
+    <div class="row">
+            <h1>Latest News</h1>
+            <h4>{{ mars.news_title }}</h4>
+            <h4>{{ mars.news_p }} </h4>
+    </div>
+    <!-- grid row  -->
+
+    <!-- grid row -->
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Featured Mars Image</h2>
+            <br>
+            <img src="{{ mars.featured_image_url }}" alt="featured_image"> 
+        </div>
+        <div class="col-md-4">
+            <br>
+            <br>
+            <h4>Mars Facts</h4>
+            <br>
+            {% for table in table %}
+                {{ table|safe }}
+            {% endfor %}
+        </div>
+    </div>
+    <!-- grid row -->
+
+
+<br>
+<br>
+<hr>
+
+<!-- content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Mars Hemispheres</h1>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="card-deck">
+            {% for x in mars.hemisphere_image_urls %}
+            <div class="card">
+                <img class="card-img-top" src="{{ mars.img_url }}" alt="{{ mars.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ mars.title }}</h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> 
+    
+</div>
+
+
+</body>
+
+<footer class="page-footer font-small bg-dark">
+    <div class ="footer-copyright text-center py-3" style="color:lightgrey">
+        © Copyright 2021 Akadia Kacha-Ochana
+    </div>
+</footer>
+</html>

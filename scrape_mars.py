@@ -44,16 +44,6 @@ def scrape():
     #quit the browser session for splinter.
     browser.quit()
 
-    # Scraping for Mars facts
-    #Next, we will use the pandas library to scrape a table of Mars facts
-    facts_url="https://space-facts.com/mars/"
-    tables=pd.read_html(facts_url)
-
-    #after inspect the tables, we see that the first table (index=0) contains the information we'd like to include in our site
-    df=tables[0]
-    df.columns=['Variable', 'Mars Data'] #used this code to change the indexed columns: https://note.nkmk.me/en/python-pandas-dataframe-rename/
-    html=df.to_html('table.html')
-
     # Scraping for the images of Mars' four hemispheres
     #setup splinter again
     executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -112,3 +102,15 @@ def scrape():
         }
 
     return mars_data    
+
+# Scraping for Mars facts
+def scrape_table():
+    #Found documentation to create a separate function to scrape the table of Mars facts
+    facts_url="https://space-facts.com/mars/"
+    tables=pd.read_html(facts_url)
+    #after inspect the tables, we see that the first table (index=0) contains the information we'd like to include in our site
+    df=tables[0]
+    df.columns=['Variable', 'Mars Data'] #used this code to change the indexed columns: https://note.nkmk.me/en/python-pandas-dataframe-rename/
+    df.set_index('Variable', inplace=True)
+    
+    return df
